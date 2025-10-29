@@ -1,0 +1,56 @@
+﻿@model List<LibraryManagement.Models.Book>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="jumbotron bg-light p-5 rounded-3 mb-4">
+    <h1 class="display-4">Welcome to Library Management System</h1>
+    <p class="lead">Manage your library books, members, and transactions efficiently.</p>
+    <hr class="my-4">
+    <p>Browse our collection of books and manage everything from one place.</p>
+    @if (Context.Session.GetString("AdminId") == null)
+    {
+        <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="Login" role="button">
+            <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-success btn-lg" asp-controller="Home" asp-action="Dashboard" role="button">
+            <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+        </a>
+    }
+</div>
+
+<h2 class="mb-4">Latest Books</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@(book.ImagePath ?? "/images/default-book.png")" class="card-img-top" alt="@book.Title" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text">
+                            <strong>Author:</strong> @book.Author<br>
+                            <strong>Category:</strong> @book.Category<br>
+                            <strong>Available:</strong> @book.AvailableQuantity / @book.Quantity
+                        </p>
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id" class="btn btn-primary btn-sm">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> No books available in the library yet.
+    </div>
+}

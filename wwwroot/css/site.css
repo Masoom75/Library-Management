@@ -1,0 +1,162 @@
+/* Custom Styles for Library Management System */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #0dcaf0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Header Styles */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.navbar-brand img {
+    border-radius: 5px;
+}
+
+/* Card Shadows */
+.card {
+    border: none;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Table Styles */
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    cursor: pointer;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-group .btn {
+    margin: 0 2px;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
+/* Card Header Styles */
+.card-header {
+    font-weight: 600;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: auto;
+}
+
+/* Jumbotron Styles */
+.jumbotron {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    transition: all 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Image */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Custom Opacity */
+.opacity-50 {
+    opacity: 0.5;
+}
+
+/* Table Responsive */
+.table-responsive {
+    border-radius: 8px;
+}
+
+/* Spacing Utilities */
+.gap-2 {
+    gap: 0.5rem !important;
+}
+
+/* Loading Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Print Styles */
+@media print {
+    .navbar, footer, .btn, .btn-group {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #dee2e6 !important;
+    }
+}

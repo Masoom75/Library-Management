@@ -1,0 +1,127 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2 class="mb-4"><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-primary shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Books</h6>
+                        <h2 class="mb-0">@ViewBag.TotalBooks</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-book fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Book" asp-action="Index" class="text-white text-decoration-none">
+                    View Books <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-success shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Members</h6>
+                        <h2 class="mb-0">@ViewBag.TotalMembers</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-users fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Member" asp-action="Index" class="text-white text-decoration-none">
+                    View Members <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-warning shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Active Issues</h6>
+                        <h2 class="mb-0">@ViewBag.ActiveTransactions</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-exchange-alt fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Transaction" asp-action="Index" class="text-white text-decoration-none">
+                    View Transactions <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-danger shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Overdue Books</h6>
+                        <h2 class="mb-0">@ViewBag.OverdueBooks</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-exclamation-triangle fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Transaction" asp-action="Index" class="text-white text-decoration-none">
+                    View Overdue <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-tasks"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a asp-controller="Book" asp-action="Create" class="btn btn-outline-primary">
+                        <i class="fas fa-plus"></i> Add New Book
+                    </a>
+                    <a asp-controller="Member" asp-action="Create" class="btn btn-outline-success">
+                        <i class="fas fa-user-plus"></i> Add New Member
+                    </a>
+                    <a asp-controller="Transaction" asp-action="IssueBook" class="btn btn-outline-warning">
+                        <i class="fas fa-hand-holding"></i> Issue Book
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle"></i> System Information</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Logged in as:</strong> @Context.Session.GetString("AdminName")</p>
+                <p><strong>Login Time:</strong> @DateTime.Now.ToString("dd MMM yyyy, hh:mm tt")</p>
+                <p><strong>System Status:</strong> <span class="badge bg-success">Online</span></p>
+            </div>
+        </div>
+    </div>
+</div>

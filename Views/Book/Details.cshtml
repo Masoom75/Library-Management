@@ -1,0 +1,90 @@
+@model LibraryManagement.Models.Book
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0"><i class="fas fa-book"></i> Book Details</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-3">
+                        <img src="@(Model.ImagePath ?? "/images/default-book.png")" 
+                             alt="@Model.Title" 
+                             class="img-fluid rounded shadow" 
+                             style="max-height: 400px;">
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <tr>
+                                <th width="40%">Title:</th>
+                                <td>@Model.Title</td>
+                            </tr>
+                            <tr>
+                                <th>Author:</th>
+                                <td>@Model.Author</td>
+                            </tr>
+                            <tr>
+                                <th>ISBN:</th>
+                                <td>@Model.ISBN</td>
+                            </tr>
+                            <tr>
+                                <th>Category:</th>
+                                <td><span class="badge bg-info">@Model.Category</span></td>
+                            </tr>
+                            <tr>
+                                <th>Publisher:</th>
+                                <td>@Model.Publisher</td>
+                            </tr>
+                            <tr>
+                                <th>Year Published:</th>
+                                <td>@Model.YearPublished</td>
+                            </tr>
+                            <tr>
+                                <th>Total Quantity:</th>
+                                <td>@Model.Quantity</td>
+                            </tr>
+                            <tr>
+                                <th>Available Quantity:</th>
+                                <td>
+                                    @if (Model.AvailableQuantity > 0)
+                                    {
+                                        <span class="badge bg-success">@Model.AvailableQuantity Available</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Out of Stock</span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Added Date:</th>
+                                <td>@Model.AddedDate.ToString("dd MMM yyyy")</td>
+                            </tr>
+                        </table>
+
+                        <div class="mt-3">
+                            @if (Context.Session.GetString("AdminId") != null)
+                            {
+                                <a asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id" 
+                                   class="btn btn-danger" 
+                                   onclick="return confirm('Are you sure?')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            }
+                            <a asp-controller="Book" asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

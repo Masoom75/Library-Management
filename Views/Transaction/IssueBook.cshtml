@@ -1,0 +1,82 @@
+@{
+    ViewData["Title"] = "Issue Book";
+    var books = ViewBag.Books as List<LibraryManagement.Models.Book>;
+    var members = ViewBag.Members as List<LibraryManagement.Models.Member>;
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0"><i class="fas fa-hand-holding"></i> Issue Book</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Transaction" asp-action="IssueBook">
+                    <div class="mb-3">
+                        <label for="bookId" class="form-label">Select Book</label>
+                        <select name="bookId" id="bookId" class="form-control" required>
+                            <option value="">-- Select a Book --</option>
+                            @if (books != null && books.Any())
+                            {
+                                @foreach (var book in books)
+                                {
+                                    <option value="@book.Id">
+                                        @book.Title - @book.Author (Available: @book.AvailableQuantity)
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="memberId" class="form-label">Select Member</label>
+                        <select name="memberId" id="memberId" class="form-control" required>
+                            <option value="">-- Select a Member --</option>
+                            @if (members != null && members.Any())
+                            {
+                                @foreach (var member in members)
+                                {
+                                    <option value="@member.Id">
+                                        @member.Name - @member.MembershipNumber (@member.Email)
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="days" class="form-label">Loan Period (Days)</label>
+                        <input type="number" name="days" id="days" class="form-control" value="14" min="1" max="30" required>
+                        <small class="text-muted">Default is 14 days</small>
+                    </div>
+
+                    @if (books == null || !books.Any())
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> No books available for issue. 
+                            <a asp-controller="Book" asp-action="Create">Add books first</a>
+                        </div>
+                    }
+
+                    @if (members == null || !members.Any())
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> No active members found. 
+                            <a asp-controller="Member" asp-action="Create">Add members first</a>
+                        </div>
+                    }
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-warning" 
+                                @(books == null || !books.Any() || members == null || !members.Any() ? "disabled" : "")>
+                            <i class="fas fa-check"></i> Issue Book
+                        </button>
+                        <a asp-controller="Transaction" asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
